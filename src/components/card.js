@@ -44,8 +44,11 @@ const createCard = (card, myId, openImageCallback) => {
   if (card.owner._id === myId) {
     deleteButton.classList.add("card__delete-button_active");
     deleteButton.addEventListener("click", (evt) => {
-      evt.target.closest(".card").remove();
-      deleteCard(card._id).catch((err) => {
+      deleteCard(card._id)
+      .then(() => {
+        evt.target.closest(".card").remove();
+      })
+      .catch((err) => {
         console.log(`Ошибка: ${err}`);
       });
     });
